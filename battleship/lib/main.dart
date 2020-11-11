@@ -19,8 +19,12 @@ class MyApp extends StatelessWidget {
                     image: DecorationImage(
                         image: AssetImage("images/battleship.jpg"),
                         fit: BoxFit.cover)),
-                child: new Column(
-                  children: [
+                child:
+                    Stack(
+                  children: <Widget>[
+                    BackdropFilter(filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                        child: Container(color: Colors.black.withOpacity(.2),)
+                  ),
                   SizedBox(
                     height: 300,
                     child: Container(
@@ -31,13 +35,17 @@ class MyApp extends StatelessWidget {
                       )
                     )
                   ),
-                  SizedBox(
-                    width: 200,
-                    height: 50,
-                    child: new ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-                        onPressed: () {},
-                        child: Text('Play')))
+
+                    Align(
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                          width: 200,
+                          height: 50,
+                          child: new ElevatedButton(
+                              style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                              onPressed: () {},
+                              child: Text('Play'))),
+                    )
                     ],
                 )
             )
