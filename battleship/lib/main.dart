@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Battleship',
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
             body: Container(
                 constraints: BoxConstraints.expand(),
