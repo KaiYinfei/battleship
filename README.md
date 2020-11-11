@@ -1,1 +1,1 @@
-# Battleship app for mobile web dev class
+# Battleship app for mobile software dev class
