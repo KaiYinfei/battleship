@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                           style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => GamePage()),);
+                                builder: (context) => Grid()),);
                           },
                           child: Text('Play'))),
                 )
