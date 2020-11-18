@@ -5,17 +5,23 @@ import 'package:flutter/material.dart';
 //https://medium.com/codechai/flutter-grid-view-from-2d-array-5467e4da5243
 
 List<List<String>> gameBoard = [
-  ['','','','','','','',''],
+  ['occupied','occupied','','','','','',''],
   ['','','','','','','',''],
   ['','','','miss','','','',''],
-  ['','test','','','','','',''],
-  ['','','','','','','',''],
-  ['','','','','','','',''],
-  ['','','','','','attack','',''],
+  ['','occupied','','','','','',''],
+  ['','occupied','','','occupied','occupied','',''],
+  ['','occupied','','','','occupied','occupied',''],
+  ['','occupied','','','','attack','',''],
   ['','','','','','','','']
 ];
 
-class GamePage extends StatelessWidget{
+class Grid extends StatefulWidget{
+  @override
+  GamePage createState () => GamePage();
+}
+
+
+class GamePage extends State<Grid>{
 
   @override
   Widget build(BuildContext context){
@@ -61,8 +67,11 @@ class GamePage extends StatelessWidget{
     x = (index / gridStateLength).floor();
     y = (index % gridStateLength);
     return GestureDetector(
-      onTap: () => _attackPosition(x, y),
-
+      onTap: () {
+        setState(() {
+          _attackPosition(x, y);
+        });
+      },
       child: GridTile(
         child: Container(
           decoration: BoxDecoration(
@@ -79,11 +88,13 @@ class GamePage extends StatelessWidget{
   Widget _attackPosition(int x, int y){
     if(gameBoard[x][y] == ''){
       gameBoard[x][y] = 'miss';
+    } else if(gameBoard[x][y] == 'miss'){
+      print('You have already attacked at: ' + 'x: $x ' + 'y: $y');
+    } else if(gameBoard[x][y] == 'occupied'){
+      gameBoard[x][y] = 'hit';
     }
     print('Testing: x: $x' + ' y: $y');
-    return _checkPosition(x, y);
-    //App understands the tap to attack, just need to update board.
-    //TODO Update Board when attack
+
   }
 
   Widget _checkPosition(int x, int y){
@@ -92,7 +103,11 @@ class GamePage extends StatelessWidget{
         return Text('');
         break;
 
-      case 'test':
+      case 'occupied':
+        return Text('');
+        break;
+
+      case 'hit':
         return Container(
           color: Colors.redAccent,
         );
