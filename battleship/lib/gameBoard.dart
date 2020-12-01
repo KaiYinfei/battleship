@@ -53,8 +53,12 @@ class GamePage extends State<Grid>{
   }
 
   Widget _buildGameBoard(){
-    musicPlayer.load('TechMusic.mp3');
-    musicPlayer.play('TechMusic.mp3');
+    var musicPlay = false;
+    if (!musicPlay){
+      musicPlayer.load('TechMusic.mp3');
+      musicPlayer.play('TechMusic.mp3');
+      musicPlay = true;
+    }
     int gameBoardLength = gameBoard.length;
     return Column(
         children: <Widget>[
