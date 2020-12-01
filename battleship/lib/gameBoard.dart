@@ -27,11 +27,23 @@ class GamePage extends State<Grid>{
   Widget build(BuildContext context){
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('Battleship Demo'),
-          ),
-          body: _buildGameBoard()
+      home: DefaultTabController(
+        length: 2,
+          child: Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              bottom: TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.arrow_circle_down)),
+                Tab(icon: Icon(Icons.arrow_circle_up)),
+              ]),
+              title: Text('Battleship'),
+            ),
+            body: TabBarView(
+                children: [
+                  _buildGameBoard(),
+                _buildGameBoard()])
+          )
       ),
     );
   }
@@ -85,16 +97,17 @@ class GamePage extends State<Grid>{
     );
   }
 
-  Widget _attackPosition(int x, int y){
+  String _attackPosition(int x, int y){
     if(gameBoard[x][y] == ''){
       gameBoard[x][y] = 'miss';
+      return 'miss';
     } else if(gameBoard[x][y] == 'miss'){
       print('You have already attacked at: ' + 'x: $x ' + 'y: $y');
-    } else if(gameBoard[x][y] == 'occupied'){
+      return 'Invalid attack';
+    } else if(gameBoard[x][y] == 'occupied') {
       gameBoard[x][y] = 'hit';
+      return 'hit';
     }
-    print('Testing: x: $x' + ' y: $y');
-
   }
 
   Widget _checkPosition(int x, int y){
