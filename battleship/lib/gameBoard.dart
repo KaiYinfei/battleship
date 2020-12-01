@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:audioplayers/audio_cache.dart';
 //Found a site that helps explaining the GridView class and has a great
 //example on how to implement this with icons, tiles, and other such things
 //https://medium.com/codechai/flutter-grid-view-from-2d-array-5467e4da5243
@@ -22,6 +22,10 @@ class Grid extends StatefulWidget{
 
 
 class GamePage extends State<Grid>{
+
+  //music comes from the Free Music Archive and all rights have been waived
+  //https://freemusicarchive.org/music/Loyalty_Freak_Music/ROBOT_DANCE_
+  AudioCache musicPlayer = AudioCache(prefix: 'music/');
 
   @override
   Widget build(BuildContext context){
@@ -49,6 +53,8 @@ class GamePage extends State<Grid>{
   }
 
   Widget _buildGameBoard(){
+    musicPlayer.load('TechMusic.mp3');
+    musicPlayer.play('TechMusic.mp3');
     int gameBoardLength = gameBoard.length;
     return Column(
         children: <Widget>[
